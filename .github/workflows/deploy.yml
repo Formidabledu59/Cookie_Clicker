@@ -20,17 +20,24 @@ jobs:
         with:
           node-version: 18 # Assurez-vous que cette version correspond à celle utilisée par votre projet
 
-      # Étape 3 : Installez les dépendances
+      # Étape 3 : Naviguez dans le dossier du projet
+      - name: Navigate to project folder
+        working-directory: ./v1
+        run: echo "Navigating to v1 folder"
+
+      # Étape 4 : Installez les dépendances
       - name: Install dependencies
+        working-directory: ./v1
         run: npm install
 
-      # Étape 4 : Construisez le projet
+      # Étape 5 : Construisez le projet
       - name: Build project
+        working-directory: ./v1
         run: npm run build
 
-      # Étape 5 : Déployez sur GitHub Pages
+      # Étape 6 : Déployez sur GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist # Assurez-vous que "dist" est le dossier de sortie de votre build
+          publish_dir: ./v1/dist # Chemin mis à jour pour correspondre à votre structure
