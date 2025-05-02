@@ -1,13 +1,25 @@
 import "../styles/style.css";
-import cookieImg from "../assets/cookie.png";
+import "../styles/game.css";
 import { setupCounter } from "./counter.js";
 
 document.querySelector("#app").innerHTML = `
   <div>
     <h1>Mon Cookie Clicker</h1>
-    <img src="${cookieImg}" id="cookie" alt="cookie" />
+    <div id="cookie"></div>
     <p id="counter-text">Vous avez cliqué 0 fois</p>
   </div>
 `;
 
-setupCounter(document.querySelector("#cookie"), document.querySelector("#counter-text"));
+const cookieElement = document.querySelector("#cookie");
+
+// Rebond au clic sans redémarrer la rotation
+cookieElement.addEventListener("click", () => {
+  cookieElement.classList.add("clicked");
+
+  setTimeout(() => {
+    cookieElement.classList.remove("clicked");
+  }, 300); // Durée du bounce
+});
+
+// Configuration du compteur
+setupCounter(cookieElement, document.querySelector("#counter-text"));
