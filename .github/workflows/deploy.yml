@@ -22,17 +22,17 @@ jobs:
 
       # Étape 3 : Naviguez dans le dossier du projet
       - name: Navigate to project folder
-        working-directory: ./v1
-        run: echo "Navigating to v1 folder"
+        working-directory: ./staging
+        run: echo "Navigating to staging folder"
 
       # Étape 4 : Installez les dépendances
       - name: Install dependencies
-        working-directory: ./v1
+        working-directory: ./staging
         run: npm install
 
       # Étape 5 : Construisez le projet
       - name: Build project
-        working-directory: ./v1
+        working-directory: ./staging
         run: npm run build
 
       # Étape 6 : Déployez sur GitHub Pages
@@ -40,4 +40,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./v1/dist # Chemin mis à jour pour correspondre à votre structure
+          publish_dir: ./staging/dist # Chemin mis à jour pour correspondre à votre structure
