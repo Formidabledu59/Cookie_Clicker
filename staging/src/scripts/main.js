@@ -1,25 +1,28 @@
 import "../styles/style.css";
-import "../styles/game.css";
-import { setupCounter } from "./counter.js";
+import { Game } from "./game";
+import { setupCounter } from "./counter";
 
 document.querySelector("#app").innerHTML = `
   <div>
     <h1>Mon Cookie Clicker</h1>
-    <div id="cookie"></div>
+    <div id="game"></div>
     <p id="counter-text">Vous avez cliqué 0 fois</p>
   </div>
 `;
 
-const cookieElement = document.querySelector("#cookie");
-
-// Rebond au clic sans redémarrer la rotation
-cookieElement.addEventListener("click", () => {
-  cookieElement.classList.add("clicked");
-
-  setTimeout(() => {
-    cookieElement.classList.remove("clicked");
-  }, 300); // Durée du bounce
+const game = new Game({
+  cookies: 0,
 });
 
-// Configuration du compteur
-setupCounter(cookieElement, document.querySelector("#counter-text"));
+// Démarrer le jeu
+game.start();
+
+// Configurer le compteur après que le cookie a été rendu
+setTimeout(() => {
+  const cookieElement = document.querySelector("#cookie"); // Sélectionne l'image du cookie
+  const counterTextElement = document.querySelector("#counter-text"); // Sélectionne le texte du compteur
+
+  if (cookieElement && counterTextElement) {
+    setupCounter(cookieElement, counterTextElement);
+  }
+}, 0);
