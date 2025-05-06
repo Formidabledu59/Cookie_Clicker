@@ -1,8 +1,8 @@
 import "../styles/animations.css";
 import goldenCookie from "../assets/action/golden_cookie.png";
 
-export function createCookieRain(container, amount) {
-  const rainCount = Math.min(30, Math.floor(Math.log2(amount + 1) * 5)); // Ajusté au gain
+export function createCookieRain(container, amount,clicPower) {
+  const rainCount = Math.min(30, Math.floor(Math.log2(amount + 1) * clicPower)); // Ajusté au gain de clic
   for (let i = 0; i < rainCount; i++) {
     const img = document.createElement("img");
     img.src = `${goldenCookie}`;
@@ -13,7 +13,7 @@ export function createCookieRain(container, amount) {
     setTimeout(() => {
       img.remove();
     }, 2000);
-  }
+  } 
 }
 
 export function showFloatingText(x, y, text, container) {

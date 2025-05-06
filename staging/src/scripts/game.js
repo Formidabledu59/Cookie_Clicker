@@ -1,6 +1,6 @@
 import { ClickableArea } from "./clickable-area";
 import "../styles/game.css";
-import { handleCookieGain } from "./animations";
+import { handleCookieGain , createCookieRain} from "./animations";
 
 export class Game {
   // Game Properties
@@ -54,7 +54,12 @@ export class Game {
     `;
   }
 
-  // Ici on utilise une fonction fléchée pour avoir encore accès au this de Game.
+  // modifie le score de cookie.
+  changeClicPower(value) {
+    this.clicPower += value;
+  }
+
+   // Ici on utilise une fonction fléchée pour avoir encore accès au this de Game.
   // Sans fonction fléchée, le this serait celui de l'élément lié au click.
   onClickableAreaClick = (event) => {
     // On ajoute 1 point aux cookies pour chaque click.
@@ -68,5 +73,7 @@ export class Game {
       const { clientX: x, clientY: y } = event;
       handleCookieGain(this.gameElement, x, y, this.clicPower, true);
     });
+    // Déclenche la pluie de cookies
+    createCookieRain(this.gameElement, this.cookies, this.clicPower); 
   };
 }

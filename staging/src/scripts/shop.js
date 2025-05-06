@@ -1,5 +1,6 @@
 import "../styles/shop.css";
 import PassiveIMG from "../assets/shop/passive.png";
+import { handleCookieGain , createCookieRain} from "./animations";
 
 export class Shop {
     constructor(game) {
