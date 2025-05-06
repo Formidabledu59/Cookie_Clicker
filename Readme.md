@@ -14,6 +14,8 @@ Vous pouvez essayer le jeu en ligne sur :
 - **Affichage dynamique du score** : Le nombre de cookies augmente à chaque clic.
 - **Cookie cliquable** : Un cookie cliquable visuellement, avec un effet au clic.
 - **Affichage de clics** : Le nombre total de clics est mis à jour après chaque interaction.
+- **Pluie de cookies** : À chaque clic, une pluie de cookies dorés tombe à l'écran.
+- **Affichage de clics** : Un effet de `+x` s'affiche à l'endroit du clic.
 - **Boutique interactive** : Accessible via un menu rétractable à droite.
 - **Système de monnaie** : Vendez vos cookies pour obtenir de l'argent (vente par quantité ou totale).
 - **Amélioration de click passif** :
