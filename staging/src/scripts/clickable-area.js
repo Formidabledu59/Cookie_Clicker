@@ -18,8 +18,8 @@ render() {
         <img id="cookie" src=${CookieIMG} width="256px" height="256px" alt="An awesome cookie." />
     `;
     // On ajoute un listener sur l'évènement "click" à l'élément.
-    this.clickableAreaElement.addEventListener("click", () => {
-    	// On ajoute ici la logique d'animation pour la réaction au clique.
+    this.clickableAreaElement.addEventListener("click", (event) => {
+      // On ajoute ici la logique d'animation pour la réaction au clique.
       window.requestAnimationFrame(() => {
         this.clickableAreaElement.classList.add("active");
         setTimeout(() => {
@@ -28,7 +28,7 @@ render() {
           });
         }, 100);
       });
-      this.onClick();
+      this.onClick(event); // Passe l'événement ici
     });
     // Il faut ajouter l'élément au DOM pour pouvoir le voir
     // On l'ajoute donc à notre élément Game.

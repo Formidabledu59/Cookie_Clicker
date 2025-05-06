@@ -1,5 +1,6 @@
 import "../styles/shop.css";
 import PassiveIMG from "../assets/shop/passive.png";
+import { handleCookieGain , createCookieRain} from "./animations";
 
 export class Shop {
     constructor(game) {
@@ -102,7 +103,7 @@ export class Shop {
         if (this.money >= cost) {
           this.money -= cost;
           this.passiveLevel++;
-          this.passiveGain = 0.5 + (this.passiveLevel - 1) * 0.1; // passe à 0.5 puis augmente de 0.1
+          this.passiveGain = 0.5 + (this.passiveLevel - 0.5) * 0.1; // passe à 0.5 puis augmente de 0.1
           this.updateDisplays();
         }
       }

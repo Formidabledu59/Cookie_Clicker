@@ -1,5 +1,6 @@
 import { ClickableArea } from "./clickable-area";
 import "../styles/game.css";
+import { handleCookieGain , createCookieRain} from "./animations";
 
 export class Game {
   // Game Properties
@@ -8,6 +9,7 @@ export class Game {
   // Game Elements
   gameElement = null;
   scoreElement = null;
+  clicPower= 1;
 
   // Game Components
   clickableArea = null;
@@ -40,7 +42,7 @@ export class Game {
   // Génère l'affichage du score.
   renderScore() {
     this.scoreElement = document.createElement("section");
-	this.scoreElement.id = "game-score";
+    this.scoreElement.id = "game-score";
     this.gameElement.append(this.scoreElement);
     this.updateScore();
   }
@@ -52,16 +54,26 @@ export class Game {
     `;
   }
 
-  // Ici on utilise une fonction fléchée pour avoir encore accès au this de Game.
+  // modifie le score de cookie.
+  changeClicPower(value) {
+    this.clicPower += value;
+  }
+
+   // Ici on utilise une fonction fléchée pour avoir encore accès au this de Game.
   // Sans fonction fléchée, le this serait celui de l'élément lié au click.
-  onClickableAreaClick = () => {
+  onClickableAreaClick = (event) => {
     // On ajoute 1 point aux cookies pour chaque click.
-    this.cookies += 1;
+    this.cookies += this.clicPower;
     // Par soucis de performance car les changements au DOM sont très lourd,
     // On demande à la Window d'attendre la prochaine frame d'animation
     // pour réaliser les changements.
     window.requestAnimationFrame(() => {
       this.updateScore();
+      // Gère l'animation pour un clic
+      const { clientX: x, clientY: y } = event;
+      handleCookieGain(this.gameElement, x, y, this.clicPower, true);
     });
+    // Déclenche la pluie de cookies
+    createCookieRain(this.gameElement, this.cookies, this.clicPower); 
   };
 }
