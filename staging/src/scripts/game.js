@@ -50,7 +50,7 @@ export class Game {
   // Met à jour l'affichage du score.
   updateScore() {
     this.scoreElement.innerHTML = `
-        <span>${this.cookies} cookies</span>
+        <span>${this.cookies.toFixed(0)} cookies</span>
     `;
   }
 
