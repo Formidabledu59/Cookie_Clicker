@@ -1,4 +1,5 @@
 import "../styles/shop.css";
+import PassiveIMG from "../assets/shop/passive.png";
 
 export class Shop {
     constructor(game) {
@@ -44,7 +45,7 @@ export class Shop {
         <button id="sell-all">Tout vendre</button>
         <div class="upgrade">
           <h3>Click passif</h3>
-          <img src="src/assets/shop/passive.png" alt="Click Passif" class="shop-item-image" />
+          <img src="${PassiveIMG}" alt="Click Passif" class="shop-item-image" />
           <p>Niveau: <span id="passive-lvl">0</span></p>
           <p>Gain: <span id="passive-gain">1</span> cookie/s</p>
           <p>Prix: <span id="passive-cost">10</span> $</p>
