@@ -1,7 +1,19 @@
 import "../styles/style.css";
+import goldenCookie from "../assets/action/golden_cookie.png";
 import { Game } from "./game";
 import { setupCounter } from "./counter";
 import { Shop } from "./shop";
+
+function updateFavicon(iconUrl) {
+  let favicon = document.querySelector("link[rel~='icon']");
+  if (!favicon) {
+    favicon = document.createElement("link");
+    favicon.rel = "icon";
+    document.head.appendChild(favicon);
+  }
+  favicon.href = iconUrl;
+}
+updateFavicon(goldenCookie);
 
 document.querySelector("#app").innerHTML = `
   <div>

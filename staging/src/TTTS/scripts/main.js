@@ -2,6 +2,18 @@ import "../styles/style.css";
 import { Game } from "./game";
 import { setupCounter } from "./counter";
 import { Shop } from "./shop";
+import tttsahur from "../assets/action/tttsahur.png";
+
+function updateFavicon(iconUrl) {
+  let favicon = document.querySelector("link[rel~='icon']");
+  if (!favicon) {
+    favicon = document.createElement("link");
+    favicon.rel = "icon";
+    document.head.appendChild(favicon);
+  }
+  favicon.href = iconUrl;
+}
+updateFavicon(tttsahur);
 
 document.querySelector("#app").innerHTML = `
   <div>
