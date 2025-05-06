@@ -1,6 +1,7 @@
 import "../styles/style.css";
 import { Game } from "./game";
 import { setupCounter } from "./counter";
+import { Shop } from "./shop";
 
 document.querySelector("#app").innerHTML = `
   <div>
@@ -26,3 +27,6 @@ setTimeout(() => {
     setupCounter(cookieElement, counterTextElement);
   }
 }, 0);
+
+// Initialise la boutique avec un accès au jeu
+const shop = new Shop(game);

@@ -1,0 +1,70 @@
+/* src/styles/shop.css */
+
+#shop-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 15px;
+  font-size: 20px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#shop {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100vh;
+  background-color: #f3f3f3;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  box-sizing: border-box;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+#shop.open {
+  right: 0;
+}
+
+#shop h2 {
+  margin-top: 0;
+  font-size: 24px;
+  text-align: center;
+}
+
+#shop p {
+  margin: 10px 0;
+}
+
+#shop button {
+  padding: 8px 12px;
+  margin-top: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#shop .upgrade {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+#shop .upgrade img {
+    width: 100px; /* Largeur fixe */
+    height: auto; /* Hauteur proportionnelle */
+    object-fit: contain; /* Ajuste l'image sans la déformer */
+    display: block;
+    margin: 0 auto 10px auto; /* Centre l'image */
+}
