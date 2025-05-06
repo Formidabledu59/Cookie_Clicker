@@ -1,3 +1,5 @@
+import icon from "./accueil-hero.png";
+
 // Liste des projets disponibles
 const projets = {
     "Cookie_Clicker": () => import("./Cookie_Clicker/scripts/main.js"),
@@ -63,7 +65,7 @@ if (projet && projets[projet]) {
 function showDefaultScreen() {
   app.innerHTML = `
     <div style="text-align: center; padding: 50px;">
-      <img src="./public/accueil-hero.png" alt="Hero" style="max-width: 300px; margin-bottom: 20px;" />
+      <img src="${icon}" alt="Hero" style="max-width: 300px; margin-bottom: 20px;" />
       <h1>Sélectionne ton <span style="color: #ff8800;">XClicker</span> !</h1>
       <p style="color: #666;">Clique sur 🎮 pour choisir un jeu</p>
       <footer style="margin-top: 40px;">
