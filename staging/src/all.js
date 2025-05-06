@@ -49,9 +49,32 @@ const projets = {
     window.location.search = `?projet=${projet}`;
   };
 
+const app = document.getElementById("app");
   // Lire le projet depuis l'URL
-const params = new URLSearchParams(window.location.search);
-const projet = params.get("projet");
+  const params = new URLSearchParams(window.location.search);
+  const projet = params.get("projet");
+
+if (projet && projets[projet]) {
+  projets[projet]();
+} else {
+  showDefaultScreen();
+}
+
+function showDefaultScreen() {
+  app.innerHTML = `
+    <div style="text-align: center; padding: 50px;">
+      <img src="./public/accueil-hero.png" alt="Hero" style="max-width: 300px; margin-bottom: 20px;" />
+      <h1>Sélectionne ton <span style="color: #ff8800;">XClicker</span> !</h1>
+      <p style="color: #666;">Clique sur 🎮 pour choisir un jeu</p>
+      <footer style="margin-top: 40px;">
+        <a href="https://github.com/formidabledu59" target="_blank">Mon GitHub</a>
+        -
+        <a href="https://github.com/Formidabledu59/Cookie_Clicker" target="_blank">Mon Projet</a>
+      </footer>
+    </div>
+  `;
+}
+
 
 // Lancer le bon projet au démarrage
 if (projet && projets[projet]) {
