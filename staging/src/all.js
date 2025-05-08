@@ -123,22 +123,31 @@ class XClickerManager {
 
 export const manager = new XClickerManager();
 
-// Fonction pour afficher les stats
+// Mise à jour des stats visuelles
 function updateStatsDisplay() {
   const state = manager.getState();
-  if (document.getElementById("money").textContent < state.money) {
-    document.getElementById("money").style.color = "green";
-  } else if (document.getElementById("money").textContent > state.money) {
+
+  const currentMoney = parseInt(document.getElementById("money").textContent, 10) || 0;
+
+  if (currentMoney < state.money) {
+    document.getElementById("money").style.color = "lightgreen";
+  } else if (currentMoney > state.money) {
     document.getElementById("money").style.color = "red";
-  }else {
+  } else {
     document.getElementById("money").style.color = "white";
   }
-  document.getElementById("money").textContent = manager.getState().money;
-  document.getElementById("cookies").textContent = manager.getState().cookies;
-  document.getElementById("ttts").textContent = manager.getState().ttts;
+
+  document.getElementById("money").textContent = state.money;
+  document.getElementById("cookies").textContent = state.cookies;
+  document.getElementById("ttts").textContent = state.ttts;
 }
 
-setInterval(updateStatsDisplay, 500);
+// Rafraîchissement continu avec animation (meilleur que setInterval)
+function loop() {
+  updateStatsDisplay();
+  requestAnimationFrame(loop);
+}
+loop();
 
 // Page d’accueil par défaut
 function showDefaultScreen() {
