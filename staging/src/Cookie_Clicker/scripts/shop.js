@@ -1,6 +1,12 @@
 import "../styles/shop.css";
 import PassiveIMG from "../assets/shop/passive.png";
 import { handleCookieGain , createCookieRain} from "./animations";
+import { manager } from "../../all.js"; // adapte le chemin selon le projet
+
+// // Exemple :
+// manager.addCookies(1);  // ajoute 1 cookie
+// manager.addMoney(10);   // ajoute 10 pièces
+// manager.addTTTS(10);   // ajoute 10 TTTs
 
 export class Shop {
     constructor(game) {
@@ -65,8 +71,8 @@ export class Shop {
     }
   
     updateDisplays() {
-      this.cookieDisplay.innerText = Math.floor(this.game.cookies);
-      this.moneyDisplay.innerText = this.money;
+      this.cookieDisplay.innerText = manager.getState().cookies.toFixed(0);
+      this.moneyDisplay.innerText = manager.getState().money.toFixed(0);
       this.shopElement.querySelector("#passive-lvl").innerText = this.passiveLevel;
       this.shopElement.querySelector("#passive-gain").innerText = this.passiveGain.toFixed(1);
       this.shopElement.querySelector("#passive-cost").innerText = this.getPassiveCost();
@@ -75,21 +81,19 @@ export class Shop {
     sellCookies() {
       const input = this.shopElement.querySelector("#sell-amount");
       const amount = parseInt(input.value);
-      if (!isNaN(amount) && amount > 0 && this.game.cookies >= amount) {
-        this.game.cookies -= amount;
-        this.money += amount;
-        this.game.updateScore();
+      if (!isNaN(amount) && amount > 0 && manager.getState().cookies >= amount) {
+        manager.removeCookies(amount); // Utilise la méthode de All.js pour retirer les cookies
+        manager.addMoney(amount); // Utilise la méthode de All.js pour ajouter de l'argent
         this.updateDisplays();
         input.value = "";
       }
     }
   
     sellAllCookies() {
-      const all = Math.floor(this.game.cookies);
+      const all = Math.floor(manager.getState().cookies);
       if (all > 0) {
-        this.game.cookies -= all;
-        this.money += all;
-        this.game.updateScore();
+        manager.removeCookies(all); // Utilise la méthode de All.js pour retirer les cookies
+        manager.addMoney(all); // Utilise la méthode de All.js pour ajouter de l'argent
         this.updateDisplays();
       }
     }
