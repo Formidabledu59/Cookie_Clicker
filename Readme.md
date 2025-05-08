@@ -1,8 +1,8 @@
 # 🍪 MyCookieClicker
 
-Clone simplifié du jeu **Cookie Clicker**, développé en **HTML** / **CSS** / **JavaScript** avec **Vite**.
+**MyCookieClicker** est un jeu web fun et évolutif dans lequel tu cliques pour récolter des cookies (ou des TTTs), gagnes de l'argent, et améliores ton rendement via une boutique interactive. Conçu en **HTML**, **CSS**, et **JavaScript** avec **Vite**, ce jeu propose une expérience fluide, animée et personnalisable.
 
-Le but du jeu est simple : cliquez sur le cookie pour augmenter le compteur de cookies, vendre vos cookies pour gagner de l'argent, et acheter des améliorations dans une boutique interactive !
+Clique, vends, achète, upgrade... et regarde ton empire grandir !
 
 ### 🚀 Démo en ligne
 Vous pouvez essayer le jeu en ligne sur :  
@@ -22,6 +22,15 @@ Vous pouvez essayer le jeu en ligne sur :
   - Commence à 0 cookies/seconde.
   - Devient actif à l'achat.
   - Gain +0.1 cookies/s par niveau.
+- **Système multi-jeux intégré** :
+  - Plusieurs variantes du clicker accessibles via une interface commune.
+  - Chaque jeu (ex: Cookie Clicker, TTTS Clicker) possède ses propres ressources.
+- **Gestion centralisée** :
+  - Un fichier `all.js` centralise les données (cookies, ttts, argent, etc.).
+  - Synchronisation automatique avec `localStorage`.
+- **Comportement responsive** : Design adapté aux écrans de toutes tailles.
+- **Affichage intelligent des nombres** :
+  - Affichage arrondi : maximum 1 chiffre après la virgule, sans trailing `.0`.
 
 ---
 
