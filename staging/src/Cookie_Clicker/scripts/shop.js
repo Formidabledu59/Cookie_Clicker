@@ -103,20 +103,25 @@ export class Shop {
     }
   
     upgradePassive() {
-        const cost = this.getPassiveCost();
-        if (this.money >= cost) {
-          this.money -= cost;
-          this.passiveLevel++;
-          this.passiveGain = 0.5 + (this.passiveLevel - 0.5) * 0.1; // passe à 0.5 puis augmente de 0.1
-          this.updateDisplays();
-        }
+      const cost = this.getPassiveCost();
+      const currentMoney = manager.getState().money;
+    
+      if (currentMoney >= cost) {
+        manager.removeMoney(cost);
+        this.passiveLevel++;
+        this.passiveGain = 0.5 + (this.passiveLevel - 0.5) * 0.1;
+        this.updateDisplays();
+      } else {
+        console.log("Pas assez d'argent pour améliorer le click passif !");
       }
+    }
+    
   
     startPassiveIncome() {
       setInterval(() => {
-        this.game.cookies += this.passiveGain;
-        this.game.updateScore();
-        this.updateDisplays();
+        manager.addCookies(this.passiveGain); // met à jour les cookies globalement
+        this.game.updateScore(); // rafraîchit l'affichage côté jeu
+        this.updateDisplays();   // rafraîchit l'affichage côté shop
       }, 1000);
     }
   }

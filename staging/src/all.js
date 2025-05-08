@@ -137,9 +137,23 @@ function updateStatsDisplay() {
     document.getElementById("money").style.color = "white";
   }
 
-  document.getElementById("money").textContent = state.money;
-  document.getElementById("cookies").textContent = state.cookies;
-  document.getElementById("ttts").textContent = state.ttts;
+  document.getElementById("money").textContent = state.money.toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 1
+  });
+  document.getElementById("cookies").textContent = state.cookies.toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 1
+  });
+  document.getElementById("ttts").textContent = state.ttts.toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 1
+  });
+  
+
+  console.log(`Updated Stats - Money: ${state.money.toFixed(1)}, Cookies: ${state.cookies.toFixed(1)}, TTTs: ${state.ttts.toFixed(1)}`);
+
+  console.log(`Current State - Cookies: ${state.cookies}, TTTs: ${state.ttts}, Money: ${state.money}`);
 }
 
 // Rafraîchissement continu avec animation (meilleur que setInterval)
