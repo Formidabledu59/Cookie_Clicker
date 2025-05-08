@@ -1,6 +1,13 @@
 import { ClickableArea } from "./clickable-area";
 import "../styles/game.css";
 import { handleCookieGain , createCookieRain} from "./animations";
+import { manager } from "../../all.js"; // adapte le chemin selon le projet
+
+// // Exemple :
+// manager.addCookies(1);  // ajoute 1 cookie
+// manager.addMoney(10);   // ajoute 10 pièces
+// manager.addTTTS(10);   // ajoute 10 TTTs
+
 
 export class Game {
   // Game Properties
@@ -15,8 +22,8 @@ export class Game {
   clickableArea = null;
 
   constructor(config) {
-    // Récupère le nombre de cookie de base via la configuration.
-    this.cookies = config.cookies;
+    // Récupère le nombre de cookie de base via All.js.
+    this.cookies = manager.getState().cookies;
     // Récupère l'élément avec l'id game.
     this.gameElement = document.querySelector("#game");
     // Crée le composant ClickableArea qui gère la logique de la zone cliquable.
@@ -50,7 +57,7 @@ export class Game {
   // Met à jour l'affichage du score.
   updateScore() {
     this.scoreElement.innerHTML = `
-        <span>${this.cookies.toFixed(0)} cookies</span>
+        <span>${manager.getState().cookies.toFixed(0)} cookies</span>
     `;
   }
 
@@ -62,8 +69,9 @@ export class Game {
    // Ici on utilise une fonction fléchée pour avoir encore accès au this de Game.
   // Sans fonction fléchée, le this serait celui de l'élément lié au click.
   onClickableAreaClick = (event) => {
-    // On ajoute 1 point aux cookies pour chaque click.
+    // On ajoute PowerClic cookies pour chaque click.
     this.cookies += this.clicPower;
+    manager.addCookies(this.clicPower);   // ajoute des cookies en fct de la puissance de clic
     // Par soucis de performance car les changements au DOM sont très lourd,
     // On demande à la Window d'attendre la prochaine frame d'animation
     // pour réaliser les changements.

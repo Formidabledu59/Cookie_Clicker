@@ -1,11 +1,17 @@
 import "../styles/shop.css";
 import PassiveIMG from "../assets/shop/passive.png";
-// import { handleCookieGain , createCookieRain} from "./animations";
+import { handleCookieGain , createCookieRain} from "./animations";
+import { manager } from "../../all.js"; // adapte le chemin selon le projet
+
+// // Exemple :
+// manager.addttts(1);  // ajoute 1 cookie
+// manager.addMoney(10);   // ajoute 10 pièces
+// manager.addTTTS(10);   // ajoute 10 TTTs
 
 export class Shop {
     constructor(game) {
       this.game = game;
-      this.cookies = game.cookies;
+      this.ttts = game.ttts;
       this.money = 0;
       this.passiveLevel = 0;
       this.passiveGain = 0;
@@ -39,10 +45,10 @@ export class Shop {
       this.shopElement.id = "shop";
       this.shopElement.innerHTML = `
         <h2>Shop à Cookie</h2>
-        <p>Cookies: <span id="shop-cookie-count">0</span></p>
+        <p>ttts: <span id="shop-cookie-count">0</span></p>
         <p>Argent: <span id="shop-money-count">0</span></p>
         <input type="number" id="sell-amount" min="1" placeholder="Combien vendre" />
-        <button id="sell-cookies">Vendre</button>
+        <button id="sell-ttts">Vendre</button>
         <button id="sell-all">Tout vendre</button>
         <div class="upgrade">
           <h3>Click passif</h3>
@@ -57,39 +63,37 @@ export class Shop {
       this.cookieDisplay = this.shopElement.querySelector("#shop-cookie-count");
       this.moneyDisplay = this.shopElement.querySelector("#shop-money-count");
   
-      this.shopElement.querySelector("#sell-cookies").addEventListener("click", () => this.sellCookies());
-      this.shopElement.querySelector("#sell-all").addEventListener("click", () => this.sellAllCookies());
+      this.shopElement.querySelector("#sell-ttts").addEventListener("click", () => this.sellttts());
+      this.shopElement.querySelector("#sell-all").addEventListener("click", () => this.sellAllttts());
       this.shopElement.querySelector("#upgrade-passive").addEventListener("click", () => this.upgradePassive());
   
       this.updateDisplays();
     }
   
     updateDisplays() {
-      this.cookieDisplay.innerText = Math.floor(this.game.cookies);
-      this.moneyDisplay.innerText = this.money;
+      this.cookieDisplay.innerText = manager.getState().ttts.toFixed(0);
+      this.moneyDisplay.innerText = manager.getState().money.toFixed(0);
       this.shopElement.querySelector("#passive-lvl").innerText = this.passiveLevel;
       this.shopElement.querySelector("#passive-gain").innerText = this.passiveGain.toFixed(1);
       this.shopElement.querySelector("#passive-cost").innerText = this.getPassiveCost();
     }
   
-    sellCookies() {
+    sellttts() {
       const input = this.shopElement.querySelector("#sell-amount");
       const amount = parseInt(input.value);
-      if (!isNaN(amount) && amount > 0 && this.game.cookies >= amount) {
-        this.game.cookies -= amount;
-        this.money += amount;
-        this.game.updateScore();
+      if (!isNaN(amount) && amount > 0 && manager.getState().ttts >= amount) {
+        manager.removeTTTS(amount); // Utilise la méthode de All.js pour retirer les ttts
+        manager.addMoney(amount); // Utilise la méthode de All.js pour ajouter de l'argent
         this.updateDisplays();
         input.value = "";
       }
     }
   
-    sellAllCookies() {
-      const all = Math.floor(this.game.cookies);
+    sellAllttts() {
+      const all = Math.floor(manager.getState().ttts);
       if (all > 0) {
-        this.game.cookies -= all;
-        this.money += all;
-        this.game.updateScore();
+        manager.removeTTTS(all); // Utilise la méthode de All.js pour retirer les ttts
+        manager.addMoney(all); // Utilise la méthode de All.js pour ajouter de l'argent
         this.updateDisplays();
       }
     }
@@ -110,7 +114,7 @@ export class Shop {
   
     startPassiveIncome() {
       setInterval(() => {
-        this.game.cookies += this.passiveGain;
+        this.game.ttts += this.passiveGain;
         this.game.updateScore();
         this.updateDisplays();
       }, 1000);
