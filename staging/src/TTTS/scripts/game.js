@@ -1,7 +1,7 @@
 import { ClickableArea } from "./clickable-area";
 import "../styles/game.css";
 import { handleCookieGain , createCookieRain} from "./animations";
-import { manager } from "../../all.js"; // adapte le chemin selon le projet
+import { manager } from "../../all.js";
 
 // // Exemple :
 // manager.addttts(1);  // ajoute 1 cookie
@@ -82,6 +82,29 @@ export class Game {
       handleCookieGain(this.gameElement, x, y, this.clicPower, true);
     });
     // Déclenche la pluie de ttts
-    createCookieRain(this.gameElement, this.ttts, this.clicPower); 
+    createCookieRain(this.gameElement, this.ttts, this.clicPower);
+    // Apparition d'un ttts selon une probabilité (ex: 10% par clic)
+    const chance = Math.random();
+    if (chance < 0.1) {
+      import("./animations.js").then(({ randomSpawn, handleCookieGain }) => {
+        randomSpawn(1).then((rewardData) => {
+          // rewardData peut être un objet {reward, x, y} si tu modifies randomSpawn
+          if (rewardData && rewardData.reward > 0) {
+            manager.addTTTS(rewardData.reward);
+            window.requestAnimationFrame(() => {
+              this.updateScore();
+              // Affiche le +x à l'endroit du clic sur le golden cookie
+              handleCookieGain(
+                this.gameElement,
+                rewardData.x,
+                rewardData.y,
+                rewardData.reward,
+                true
+              );
+            });
+          }
+        });
+      });
+    }
   };
 }

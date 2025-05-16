@@ -77,39 +77,39 @@ class XClickerManager {
 
   addCookies(n) {
     this.cookies += n;
-    this.save();
+    // this.save();
   }
 
   removeCookies(n) {
     this.cookies = Math.max(0, this.cookies - n);
-    this.save();
+    // this.save();
   }
 
   addTTTS(n) {
     this.ttts += n;
-    this.save();
+    // this.save();
   }
 
   removeTTTS(n) {
     this.ttts = Math.max(0, this.ttts - n);
-    this.save();
+    // this.save();
   }
 
   addMoney(n) {
     this.money += n;
-    this.save();
+    // this.save();
   }
 
   removeMoney(n) {
     this.money = Math.max(0, this.money - n);
-    this.save();
+    // this.save();
   }
 
   reset() {
     this.cookies = 0;
     this.ttts = 0;
     this.money = 0;
-    this.save();
+    // this.save();
   }
 
   getState() {
@@ -122,6 +122,10 @@ class XClickerManager {
 }
 
 export const manager = new XClickerManager();
+
+window.addEventListener("beforeunload", () => {
+  manager.save();
+});
 
 // Mise à jour des stats visuelles
 function updateStatsDisplay() {

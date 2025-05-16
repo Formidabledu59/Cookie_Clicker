@@ -32,3 +32,45 @@
       opacity: 0;
     }
   }
+
+  .golden-random {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  z-index: 1000;
+  cursor: pointer;
+  animation: fadeInOut 5s ease-in-out forwards;
+  pointer-events: auto;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+.golden-cookie {
+  transition: opacity 1s ease;
+  opacity: 0;
+}
+
+.golden-cookie.fade-in {
+  opacity: 1;
+}
+
+.golden-cookie.fade-out {
+  opacity: 0;
+}

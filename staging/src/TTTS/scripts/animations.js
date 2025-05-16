@@ -38,3 +38,39 @@ export function handleCookieGain(container, x, y, amount, isClick) {
     createCookieRain(container, amount);
   }
 }
+
+export function randomSpawn(passiveGain = 1) {
+  return new Promise((resolve) => {
+    const reward = Math.floor(Math.random() * (passiveGain * 1000 - 1 + 1)) + 1;
+    const img = document.createElement("img");
+    img.src = tttsahur;
+    img.className = "golden-cookie fade-in";
+    img.style.position = "absolute";
+    img.style.top = `${Math.random() * 80 + 10}%`;
+    img.style.left = `${Math.random() * 80 + 10}%`;
+    img.style.width = "50px";
+    img.style.height = "50px";
+    img.style.cursor = "pointer";
+    img.style.zIndex = 1000;
+    img.style.transition = "opacity 1s";
+
+    document.body.appendChild(img);
+
+    let timeout = setTimeout(() => {
+      img.classList.remove("fade-in");
+      img.classList.add("fade-out");
+      setTimeout(() => img.remove(), 1000);
+      resolve(0);
+    }, 5000);
+
+    img.addEventListener("click", (e) => {
+      clearTimeout(timeout);
+      img.remove();
+      resolve({
+        reward,
+        x: e.clientX,
+        y: e.clientY
+      });
+    });
+  });
+}

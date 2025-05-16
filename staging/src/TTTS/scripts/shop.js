@@ -1,7 +1,7 @@
 import "../styles/shop.css";
 import PassiveIMG from "../assets/shop/passive.png";
 import { handleCookieGain, createCookieRain } from "./animations";
-import { manager } from "../../all.js"; // adapte le chemin selon ton projet
+import { manager } from "../../all.js";
 
 export class Shop {
   constructor(game) {

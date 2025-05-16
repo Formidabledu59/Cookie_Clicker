@@ -42,3 +42,5 @@ setTimeout(() => {
 
 // Initialise la boutique avec un accès au jeu
 const shop = new Shop(game);
+
+// todo : tung tung a chaque clic + titre , sound board

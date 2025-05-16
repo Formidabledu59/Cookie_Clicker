@@ -1,0 +1,61 @@
+.
+├── .github
+│   └── workflows
+│       └── deploy.yml
+├── Architecture
+│   ├── generateArchitecture.js
+│   └── README.md
+├── assets
+│   ├── Capture d'écran V0.png
+│   └── Capture d'écran V1.png
+├── package-lock.json
+├── Readme.md
+└── staging
+    ├── .gitignore
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   └── vite.svg
+    ├── src
+    │   ├── accueil-hero.png
+    │   ├── all.js
+    │   ├── Cookie_Clicker
+    │   │   ├── assets
+    │   │   │   ├── action
+    │   │   │   │   └── golden_cookie.png
+    │   │   │   ├── cookie.png
+    │   │   │   └── shop
+    │   │   │       └── passive.png
+    │   │   ├── scripts
+    │   │   │   ├── animations.js
+    │   │   │   ├── clickable-area.js
+    │   │   │   ├── counter.js
+    │   │   │   ├── game.js
+    │   │   │   ├── main.js
+    │   │   │   └── shop.js
+    │   │   └── styles
+    │   │       ├── animations.css
+    │   │       ├── game.css
+    │   │       ├── shop.css
+    │   │       └── style.css
+    │   └── TTTS
+    │       ├── assets
+    │       │   ├── action
+    │       │   │   └── tttsahur.png
+    │       │   ├── shop
+    │       │   │   └── passive.png
+    │       │   └── ttts.png
+    │       ├── scripts
+    │       │   ├── animations.js
+    │       │   ├── clickable-area.js
+    │       │   ├── counter.js
+    │       │   ├── game.js
+    │       │   ├── main.js
+    │       │   └── shop.js
+    │       └── styles
+    │           ├── animations.css
+    │           ├── game.css
+    │           ├── shop.css
+    │           └── style.css
+    └── vite.config.js

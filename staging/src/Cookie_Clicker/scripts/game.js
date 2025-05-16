@@ -1,7 +1,7 @@
 import { ClickableArea } from "./clickable-area";
 import "../styles/game.css";
-import { handleCookieGain , createCookieRain} from "./animations";
-import { manager } from "../../all.js"; // adapte le chemin selon le projet
+import { handleCookieGain, createCookieRain } from "./animations";
+import { manager } from "../../all.js";
 
 // // Exemple :
 // manager.addCookies(1);  // ajoute 1 cookie
@@ -66,22 +66,39 @@ export class Game {
     this.clicPower += value;
   }
 
-   // Ici on utilise une fonction fléchée pour avoir encore accès au this de Game.
+  // Ici on utilise une fonction fléchée pour avoir encore accès au this de Game.
   // Sans fonction fléchée, le this serait celui de l'élément lié au click.
   onClickableAreaClick = (event) => {
-    // On ajoute PowerClic cookies pour chaque click.
     this.cookies += this.clicPower;
-    manager.addCookies(this.clicPower);   // ajoute des cookies en fct de la puissance de clic
-    // Par soucis de performance car les changements au DOM sont très lourd,
-    // On demande à la Window d'attendre la prochaine frame d'animation
-    // pour réaliser les changements.
+    manager.addCookies(this.clicPower);
     window.requestAnimationFrame(() => {
       this.updateScore();
-      // Gère l'animation pour un clic
       const { clientX: x, clientY: y } = event;
       handleCookieGain(this.gameElement, x, y, this.clicPower, true);
     });
-    // Déclenche la pluie de cookies
-    createCookieRain(this.gameElement, this.cookies, this.clicPower); 
+    createCookieRain(this.gameElement, this.cookies, this.clicPower);
+    // Apparition d'un golden cookie selon une probabilité (ex: 10% par clic)
+    const chance = Math.random();
+    if (chance < 0.1) {
+      import("./animations.js").then(({ randomSpawn, handleCookieGain }) => {
+        randomSpawn(1).then((rewardData) => {
+          // rewardData peut être un objet {reward, x, y} si tu modifies randomSpawn
+          if (rewardData && rewardData.reward > 0) {
+            manager.addCookies(rewardData.reward);
+            window.requestAnimationFrame(() => {
+              this.updateScore();
+              // Affiche le +x à l'endroit du clic sur le golden cookie
+              handleCookieGain(
+                this.gameElement,
+                rewardData.x,
+                rewardData.y,
+                rewardData.reward,
+                true
+              );
+            });
+          }
+        });
+      });
+    }
   };
 }
